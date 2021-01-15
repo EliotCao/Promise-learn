@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Promise封装AJAX</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">Promise封装AJAX</h2>
+        <button class="btn btn-primary" id="btn">点击发送</button>
+    </div>
+    <script>
+        //接口地址 https://api.apiopen.top/getJoke
+        //获取元素
+        const btn = document.querySelector('#btn');
+        //绑定单击事件
+        btn.addEventListener('click', function(){
+            const p = new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET','https://api.apiopen.top/getJoke');
+                xhr.send();
+                xhr.onreadystatechange = function (){
+                    if(xhr.readyState === 4){
+                        if(xhr.status >= 200 && xhr.status < 300){
+                            resolve(xhr.response);
+                        }else{
+                            reject(xhr.status);
+                        }
+                    }
+                }
+            });
+
+            p.then((value) => {
+                //对象状态成功的回调
+                console.log(value);
+            },(reason) => {
+                //对象状态失败的回调
+                console.log(reason);
+            });
+        });
+    </script>
+    
+</body>
+</html>
