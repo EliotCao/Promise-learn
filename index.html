@@ -29,19 +29,19 @@
                 setTimeout(() => {
                     let n = rand(1,100);
                     if(n < 30){
-                        resolve()
+                        resolve(n);
                     }else{
-                        reject()
+                        reject(n);
                     }
                 })
             });
 
-            p.then(() => {
+            p.then((value) => {
                 //对象状态成功的回调
-                console.log('恭喜获得5万劳斯莱斯优惠券');
-            },() => {
+                alert('恭喜获得5万劳斯莱斯优惠券' + value);
+            },(reason) => {
                 //对象状态失败的回调
-                alert('再接再厉');
+                alert('再接再厉' + reason);
             })
         })
     </script>
