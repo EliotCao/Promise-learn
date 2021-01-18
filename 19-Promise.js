@@ -19,8 +19,14 @@ function Promise(executor){
         self.PromistResult = data;
     }
 
-    //同步调用【执行器方法】
-    executor(resolve,reject);
+    try{
+        //同步调用【执行器方法】
+        executor(resolve,reject);
+    } catch(e) {
+        //修改promise的状态为‘失败’
+        reject(e);
+    }
+    
 }
 
 //添加then方法
