@@ -19,20 +19,33 @@
             },1000);
         });
 
-        const result = p.then(value => {
-            // console.log(value);
-            return 'hello Promise';
-            // return new Promise((resolve,reject) => {
-            //     // resolve('success');
-            //     reject('error');
-            // })
-            // throw 'Fail';
-        },reason => {
-            console.warn(reason);
-            // throw 'Fail'
-        });
+        //catch
+        // const res = p.catch(r=> {
+        //     console.warn(r);
+        // })
+        // console.log(warn);
 
-        console.log(result);
+        //异常穿透
+        // p.then(value => {
+        //     console.log(111);
+        //     throw 'ERROR'
+        // }).then(v => {
+        //     console.log(222);
+        // }).then(v => {
+        //     console.log(333);
+        // }).catch(r => {
+        //     console.log(r);
+        // });
+
+        //值传递
+        p.then()
+        .then(v => {
+            console.log(222);
+        }).then(v => {
+            console.log(333);
+        }).catch(r => {
+            console.log(r);
+        });
     </script>
 </body>
 </html>
