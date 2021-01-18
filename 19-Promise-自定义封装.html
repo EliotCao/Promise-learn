@@ -14,16 +14,24 @@
             // throw 'error'
 
             setTimeout(() => {
-                resolve('ok');
-                // reject('error');
+                // resolve('ok');
+                reject('error');
             },1000);
         });
-        console.log(p);
+
         p.then(value => {
             console.log(value);
         },reason => {
             console.warn(reason);
         });
+
+        p.then(value => {
+            alert(value);
+        },reason => {
+            alert(reason);
+        });
+
+        console.log(p);
     </script>
 </body>
 </html>
