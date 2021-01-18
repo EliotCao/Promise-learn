@@ -43,6 +43,7 @@ function Promise(executor){
 
 //添加then方法
 Promise.prototype.then = function(onResolved, onRejected){
+    const self = this;
     return new Promise((resolve,reject) => {
         //调用回调函数
         if(this.PromiseState === 'fulfilled'){
@@ -74,8 +75,46 @@ Promise.prototype.then = function(onResolved, onRejected){
         if(this.PromiseState === 'pending'){
             //保存回调函数
             this.callbacks.push({
-                onResolved: onResolved,
-                onRejected: onRejected
+                onResolved: function(){
+                    try{
+                        //执行成功回调函数
+                        let result = onResolved(self.PromiseResult);
+                        //判断
+                        if(result instanceof Promise){
+                            //如果是promise类型的对象
+                            result.then(v => {
+                                resolve(v);
+                            },r => {
+                                reject(r);
+                            })
+                        } else {
+                            //结果的对象状态为"成功"
+                            resolve(result);
+                        }
+                    }catch(e){
+                        reject(e);
+                    }
+                },
+                onRejected: function(){
+                    try{
+                        //执行成功回调函数
+                        let result = onRejected(self.PromiseResult);
+                        //判断
+                        if(result instanceof Promise){
+                            //如果是promise类型的对象
+                            result.then(v => {
+                                resolve(v);
+                            },r => {
+                                reject(r);
+                            })
+                        } else {
+                            //结果的对象状态为"成功"
+                            resolve(result);
+                        }
+                    }catch(e){
+                        reject(e);
+                    }
+                }
             });
         }
     });
