@@ -135,7 +135,7 @@ Promise.all = function(promises){
         let count = 0;
         let arr = [];
         for (let index = 0; index < promises.length; index++) {
-            const element = promises[index].then(v => {
+            promises[index].then(v => {
                 //得知对象的状态是成功
                 //每个promise对象都成功
                 // resolve();
@@ -145,6 +145,19 @@ Promise.all = function(promises){
                 if(count === promises.length){
                     resolve(arr);
                 }
+            }, r => {
+                reject(r);
+            });
+        }
+    });
+}
+
+//添加race方法
+Promise.race = function(promises){
+    return new Promise((resolve,reject) => {
+        for (let index = 0; index < promises.length; index++) {
+            promises[index].then(v => {
+                resolve(v);
             }, r => {
                 reject(r);
             });

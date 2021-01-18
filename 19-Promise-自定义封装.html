@@ -9,13 +9,16 @@
 <body>
     <script>
         let p1 = new Promise((resolve,reject) => {
-            resolve('ok');
+            // resolve('ok');
+            setTimeout(() =>{
+                resolve('ok');
+            },1000);
         });
         // let p2 = Promise.resolve('Success');
         let p2 = Promise.reject('Error');
         let p3 = Promise.resolve('Oh Yeah');
 
-        let result = Promise.all([p1,p2,p3]);
+        let result = Promise.race([p1,p2,p3]);
         console.log(result);
     </script>
 </body>
