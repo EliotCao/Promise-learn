@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise关键问题 - Promise对象状态改变的方式</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve,reject) => {
+            // resolve('ok');//pending -> fulfilled(resolved)
+            // reject('Error');//pending -> rejected
+            throw '抛出错误'
+        });
+        console.log(p);
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise关键问题 - Promise 异常穿透</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve,reject) => {
+            setTimeout(() => {
+                resolve('ok');
+                // reject('error');
+            },1000);
+        });
+
+        p.then(value => {
+            console.log(111);
+            throw '抛出错误'
+        }).then(value => {
+            console.log(222);
+        }).then(value => {
+            console.log(333);
+        }).catch(reason => {
+            console.log(reason);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primise API - all</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve,reject) => {
+            resolve('ok');
+        });
+        // let p2 = Promise.resolve('Success');
+        let p2 = Promise.reject('Error');
+        let p3 = Promise.resolve('Oh Yeap');
+
+        const result = Promise.all([p,p2,p3]);
+        console.log(result);
+    </script>
+</body>
+</html>
