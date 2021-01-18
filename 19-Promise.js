@@ -36,28 +36,47 @@ function Promise(executor){
         //同步调用【执行器方法】
         executor(resolve,reject);
     } catch(e) {
-        //修改promise的状态为‘失败’
+        //修改promise的状态为"失败"
         reject(e);
     }
 }
 
 //添加then方法
 Promise.prototype.then = function(onResolved, onRejected){
-    //调用回调函数
-    if(this.PromiseState === 'fulfilled'){
-        onResolved(this.PromiseResult);
-    }
-    
-    if(this.PromiseState === 'rejected'){
-        onRejected(this.PromiseResult);
-    }
+    return new Promise((resolve,reject) => {
+        //调用回调函数
+        if(this.PromiseState === 'fulfilled'){
+            try{
+                //获取回调函数的执行结果
+                let result = onResolved(this.PromiseResult);
+                if(result instanceof Promise){
+                    //如果是promise类型的对象
+                    result.then(v => {
+                        resolve(v);
+                    },r => {
+                        reject(r);
+                    })
+                } else {
+                    //结果的对象状态为"成功"
+                    resolve(result);
+                }
+            }catch(e){
+                reject(e);
+            }
+            
+        }
+        
+        if(this.PromiseState === 'rejected'){
+            onRejected(this.PromiseResult);
+        }
 
-    //判断pending状态
-    if(this.PromiseState === 'pending'){
-        //保存回调函数
-        this.callbacks.push({
-            onResolved: onResolved,
-            onRejected: onRejected
-        });
-    }
+        //判断pending状态
+        if(this.PromiseState === 'pending'){
+            //保存回调函数
+            this.callbacks.push({
+                onResolved: onResolved,
+                onRejected: onRejected
+            });
+        }
+    });
 }
