@@ -117,6 +117,13 @@ Promise.resolve = function(value){
             //状态设置为成功
             resolve(value);
         }
-    })
+    });
 
+}
+
+//添加reject方法
+Promise.reject = function(reason){
+    return new Promise((resolve,reject) => {
+        reject(reason);
+    })
 }
