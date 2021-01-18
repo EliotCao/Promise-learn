@@ -8,44 +8,13 @@
 </head>
 <body>
     <script>
-        let p = new Promise((resolve,reject) => {
-            // resolve('ok');
-            // reject('error');
-            // throw 'error'
-
-            setTimeout(() => {
-                resolve('ok');
-                // reject('Oh, failed');
-            },1000);
-        });
-
-        //catch
-        // const res = p.catch(r=> {
-        //     console.warn(r);
-        // })
-        // console.log(warn);
-
-        //异常穿透
-        // p.then(value => {
-        //     console.log(111);
-        //     throw 'ERROR'
-        // }).then(v => {
-        //     console.log(222);
-        // }).then(v => {
-        //     console.log(333);
-        // }).catch(r => {
-        //     console.log(r);
-        // });
-
-        //值传递
-        p.then()
-        .then(v => {
-            console.log(222);
-        }).then(v => {
-            console.log(333);
-        }).catch(r => {
-            console.log(r);
-        });
+        let p = Promise.resolve('OK');
+        let p2 = Promise.resolve(new Promise((resolve,reject) => {
+            resolve('Success');
+            // reject('error-1');
+        }));
+        let p3 = Promise.resolve(Promise.resolve('Oh,Yeah'));
+        console.log(p3);
     </script>
 </body>
 </html>
