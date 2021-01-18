@@ -8,18 +8,25 @@
 </head>
 <body>
     <script>
-        let p1 = new Promise((resolve,reject) => {
-            // resolve('ok');
-            reject('Error');
-            console.log(111);
-        });
-        p1.then(value => {
-            console.log(222);
-        },r => {
-            console.log(444);
-            console.warn(r);
-        })
-        console.log(333);//111 333 222
+        // let p1 = new Promise((resolve,reject) => {
+        //     // resolve('ok');
+        //     // reject('Error');
+        //     // throw 'error';
+        //     // console.log(111);
+        //     setTimeout(()=>{
+        //         // resolve('ok');
+        //         reject('error');
+        //     });
+        // });
+        // p1.then(value => {
+        //     console.log(222);
+        // },r => {
+        //     console.log(444);
+        //     console.warn(r);
+        // })
+        // console.log(333);//111 333 222
+
+        console.log(Promise.resolve('ok'));
     </script>
 </body>
 </html>
