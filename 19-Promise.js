@@ -14,9 +14,11 @@ function Promise(executor){
         //2.设置对象结果值（promiseResult）
         self.PromiseResult = data;
         //调用成功的回调函数
-        self.callbacks.forEach(item => {
-            item.onResolved(data);
-        })
+        setTimeout(()=>{
+            self.callbacks.forEach(item => {
+                item.onResolved(data);
+            });
+        });
     }
     //reject函数
     function reject(data){
@@ -27,9 +29,11 @@ function Promise(executor){
         //2.设置对象结果值（promiseResult）
         self.PromiseResult = data;
         //执行回调
-        self.callbacks.forEach(item => {
-            item.onRejected(data);
-        })
+        setTimeout(()=>{
+            self.callbacks.forEach(item => {
+                item.onRejected(data);
+            });
+        });
     }
 
     try{
@@ -76,11 +80,15 @@ Promise.prototype.then = function(onResolved, onRejected){
         }
         //调用回调函数
         if(this.PromiseState === 'fulfilled'){
-            callback(onResolved)
+            setTimeout(() => {
+                callback(onResolved)
+            });
         }
         
         if(this.PromiseState === 'rejected'){
-            callback(onRejected);
+            setTimeout(() => {
+                callback(onRejected);
+            });
         }
 
         //判断pending状态
