@@ -14,22 +14,22 @@
             // throw 'error'
 
             setTimeout(() => {
-                // resolve('ok');
-                reject('Oh, failed');
+                resolve('ok');
+                // reject('Oh, failed');
             },1000);
         });
 
         const result = p.then(value => {
             // console.log(value);
-            // return 'hello Promise';
+            return 'hello Promise';
             // return new Promise((resolve,reject) => {
             //     // resolve('success');
             //     reject('error');
             // })
-            throw 'Fail';
+            // throw 'Fail';
         },reason => {
-            // console.warn(reason);
-            throw 'Fail'
+            console.warn(reason);
+            // throw 'Fail'
         });
 
         console.log(result);
