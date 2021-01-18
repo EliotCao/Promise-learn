@@ -127,3 +127,27 @@ Promise.reject = function(reason){
         reject(reason);
     })
 }
+
+//添加all方法
+Promise.all = function(promises){
+    //返回结果为Promise对象
+    return new Promise((resolve,reject) => {
+        let count = 0;
+        let arr = [];
+        for (let index = 0; index < promises.length; index++) {
+            const element = promises[index].then(v => {
+                //得知对象的状态是成功
+                //每个promise对象都成功
+                // resolve();
+                count++;
+                //将当前promise对象成功的结果存入到数组中
+                arr[index] = v;
+                if(count === promises.length){
+                    resolve(arr);
+                }
+            }, r => {
+                reject(r);
+            });
+        }
+    })
+}
