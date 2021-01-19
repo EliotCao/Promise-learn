@@ -138,14 +138,67 @@ throw 'error'
 
 ### 串联多个任务
 
-![](C:\Users\RZNQGT\Desktop\Screenshot 2021-01-14 154358.png)
+```javascript
+let p = new Promise((resolve,reject) => {
+    setTimeout(() => {
+        resolve('ok');
+    },1000);
+});
+
+p.then(value => {
+    return new Promise((resolve,reject) => {
+        resolve('ok');
+    });
+}).then(value => {
+    console.log(value);
+}).then(value => {
+    console.log(value);
+})
+```
 
 ### 异常穿透
 
-![](C:\Users\RZNQGT\Desktop\Screenshot 2021-01-14 154611.png)
+```javascript
+let p = new Promise((resolve,reject) => {
+    setTimeout(() => {
+        resolve('ok');
+        // reject('error');
+    },1000);
+});
+
+p.then(value => {
+    console.log(111);
+    throw '抛出错误'
+}).then(value => {
+    console.log(222);
+}).then(value => {
+    console.log(333);
+}).catch(reason => {
+    console.log(reason);
+})
+```
 
 ### 中断promise链
 
-![](C:\Users\RZNQGT\Desktop\Screenshot 2021-01-14 154753.png)
+```javascript
+let p = new Promise((resolve,reject) => {
+    setTimeout(() => {
+        resolve('ok');
+        // reject('error');
+    },1000);
+});
+
+p.then(value => {
+    console.log(111);
+    //有且仅有一个方式，返回pending状态的primise
+    return new Promise(() => {});
+}).then(value => {
+    console.log(222);
+}).then(value => {
+    console.log(333);
+}).catch(reason => {
+    console.log(reason);
+})
+```
 
 ## 自定义封装
