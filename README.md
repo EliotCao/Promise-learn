@@ -34,7 +34,7 @@ pending -> rejected（失败）
 
 ### 工作流程
 
-![](C:\Users\RZNQGT\Desktop\Screenshot 2021-01-13 094025.png)
+![](./工作流程.png)
 
 ## API
 
