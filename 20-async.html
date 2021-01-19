@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asyn函数</title>
+</head>
+<body>
+    <script>
+        async function main(){
+            //1.如果返回是非Promise类型的数据
+            // return 521;
+            //2.如果返回是Promise类型的数据
+            // return new Promise((r,rj)=>{
+            //     // r('0k');
+            //     rj('error');
+            // })
+            //3.抛出异常
+            throw 'Oh No';
+        }
+
+        let result = main();
+        console.log(result);
+    </script>
+</body>
+</html>
